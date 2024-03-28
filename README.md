@@ -159,7 +159,7 @@ $ wsl
 # use github personal access tokens (classic)
 $ export CR_PAT=****
 
-# log in
+# log in ghcr
 $ echo $CR_PAT | docker login ghcr.io -u yute-oishi --password-stdin
 
 # tag
