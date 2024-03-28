@@ -169,6 +169,6 @@ $ docker tag fastapi-sample-api ghcr.io/yute-oishi/kube-test:v0
 $ docker push ghcr.io/yute-oishi/kube-test:LABEL
 
 # connect github package to repository
-# https://github.com/yute-oishi/kube-test/pkgs/container/kube-test
+# https://ghcr.io/yute-oishi/kube-test
 
 ```
