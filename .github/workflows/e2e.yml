@@ -10,7 +10,9 @@ on:
 jobs:
   e2e-test:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: fastapi-app
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
