@@ -149,3 +149,26 @@ $ kubectl delete svc nginx
 $ kubectl delete deploy nginx
 $ eksctl delete cluster --name test-cluster --region ap-northeast-1
 ```
+
+### github packages manual deploy
+
+```bash
+# if you use windows
+$ wsl
+
+# use github personal access tokens (classic)
+$ export CR_PAT=****
+
+# log in
+$ echo $CR_PAT | docker login ghcr.io -u yute-oishi --password-stdin
+
+# tag
+$ docker tag fastapi-sample-api ghcr.io/yute-oishi/kube-test:v0
+
+# push
+$ docker push ghcr.io/yute-oishi/kube-test:LABEL
+
+# connect github package to repository
+# https://github.com/yute-oishi/kube-test/pkgs/container/kube-test
+
+```
