@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: fastapi
+  name: fastapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fastapi
+    spec:
+      containers:
+        - image: ghcr.io/nakamasato/fastapi-sample:pr-97
+          name: fastapi
+          envFrom:
+            - configMapRef:
+                name: fastapi
+            - secretRef:
+                name: fastapi
+          resources: {}
+status: {}

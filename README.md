@@ -110,3 +110,42 @@ $ kubectl port-forward svc/nginx 8080:80
 $ kubectl logs nginx-6c9fd56bbc-bxhbn -f
 # access to http://localhost:8080
 ```
+
+### fastapi app
+
+```bash
+# create db
+$ kubectl apply -f fastapi\mysql-namespace.yaml,fastapi\mysql-deployment.yaml,fastapi\mysql-service.yaml -n database
+$ kubectl exec -n database -it mysql-****** sh
+$ mysql -uroot -ppass
+
+# create app
+$ kubectl apply -f fastapi\app-namespace.yaml,fastapi/app-configmap.yaml,fastapi/app-secret.yaml,fastapi\app-deployment.yaml,fastapi\app-service.yaml -n fastapi
+
+# port forward
+$ kubectl port-forward svc/fastapi 8080:80 -n fastapi
+
+# delete all
+$ kubectl delete ns database, fastapi
+
+```
+
+### eks
+
+```bash
+$ eksctl create cluster --name test-cluster --region ap-northeast-1
+# created aws eks, vpc, ec3, cloudformation
+# created eks cluster's context in local k8s
+# change the current context to eks context (new created)
+
+$ kubectl get node
+$ kubectl create deploy nginx --image=nginx --replicas=3
+$ kubectl create svc loadbalancer nginx --tcp=80
+$ kubectl get svc
+# now, can access to the endpoint!
+
+# delete resources
+$ kubectl delete svc nginx
+$ kubectl delete deploy nginx
+$ eksctl delete cluster --name test-cluster --region ap-northeast-1
+```

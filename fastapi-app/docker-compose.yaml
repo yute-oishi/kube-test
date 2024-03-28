@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
+    env_file:
+      - .env
+
+  api:
+    build:
+      context: ./app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./app/:/app/
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - .env
+    healthcheck:
+      test: "curl -f http://localhost:8000/ || exit 1"
+      timeout: 45s
+      interval: 5s
+      retries: 20
