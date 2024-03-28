@@ -1,14 +1,14 @@
 name: pre-commit
 on:
-  pull_request:
+  push:
 
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: fastapi-app
     steps:
       - uses: actions/checkout@v2
+      - name: Hack pre-commit
+        run: |
+          cp .github/workflow-config/.pre-commit-config.yaml .pre-commit-config.yaml
       - uses: actions/setup-python@v2
       - uses: pre-commit/action@v2.0.3
