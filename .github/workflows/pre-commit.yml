@@ -5,6 +5,9 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fastapi-app
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
