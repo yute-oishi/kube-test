@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Hack pre-commit
+      - name: copy pre-commit config
         run: |
           cp .github/workflow-config/.pre-commit-config.yaml .pre-commit-config.yaml
       - uses: actions/setup-python@v2
